@@ -17,27 +17,22 @@ public class Store {
     );
 
     public void buy(Product product) {
-        try {
-            if (cashBalance - ( product.getStock() * product.getCost() ) < 0)
-                throw new Exception("Not enough cash to make the buy.");
-            if (amountStockProducts + product.getStock() > maxAmountStockProducts)
-                throw new Exception("The buy exceed the maximum amount of products allowed.");
+        if (cashBalance - ( product.getStock() * product.getCost() ) < 0)
+            throw new IllegalArgumentException("Not enough cash to make the buy.");
+        if (amountStockProducts + product.getStock() > maxAmountStockProducts)
+            throw new IllegalArgumentException("The buy exceed the maximum amount of products allowed.");
 
-            Product productOldData = searchInStock(product.getId());
-            if (productOldData != null)
-                product.setStock(product.getStock() + productOldData.getStock());
+        Product productOldData = searchInStock(product.getId());
+        if (productOldData != null)
+            product.setStock(product.getStock() + productOldData.getStock());
 
-            product.setForSale(true);
-            getProductList(product.getId()).add(product);
-            amountStockProducts += product.getStock();
-            cashBalance -= product.getCost() * product.getStock();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        product.setForSale(true);
+        getProductList(product.getId()).add(product);
+        amountStockProducts += product.getStock();
+        cashBalance -= product.getCost() * product.getStock();
     }
 
-    private Product searchInStock(String id) {
+    public Product searchInStock(String id) {
         List<Product> stockList = getProductList(id);
         for (Product product : stockList) {
             if (product.getId().equals(id))
