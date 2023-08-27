@@ -1,8 +1,5 @@
 package org.example.product;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public abstract class Product {
     private String id;
     private String description;
