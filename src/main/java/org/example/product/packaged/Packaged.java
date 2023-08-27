@@ -1,7 +1,6 @@
 package org.example.product.packaged;
 
 import org.example.product.Product;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,10 +10,10 @@ public class Packaged extends Product {
 
     @Override
     public void setId(String id) {
-        Pattern pattern = Pattern.compile("^AB\\d\\d\\d$");
+        Pattern pattern = Pattern.compile("^AB[0-9][0-9][0-9]$");
         Matcher matcher = pattern.matcher(id);
         if (matcher.find())
-            this.setId(id);
+            super.setId(id);
         else
             throw new IllegalArgumentException("Wrong Id format, expected: ABXXX where X = digit");
     }
