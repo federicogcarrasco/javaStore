@@ -1,13 +1,18 @@
 package org.example.product.drink;
 
+import org.example.product.Food;
 import org.example.product.Product;
+
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DrinkProduct extends Product {
+public class DrinkProduct extends Product implements Food {
     private boolean alcohol;
     private Integer alcoholPercentage;
     private boolean imported;
+    private Date expirationDate;
+    private short calories;
 
     @Override
     public void setId(String id) {
@@ -45,5 +50,25 @@ public class DrinkProduct extends Product {
 
     public void setImported(boolean imported) {
         this.imported = imported;
+    }
+
+    @Override
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    @Override
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    @Override
+    public short getCalories() {
+        return calories;
+    }
+
+    @Override
+    public void setCalories(short calories) {
+        this.calories = calories;
     }
 }
