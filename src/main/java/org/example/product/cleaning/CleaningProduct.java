@@ -4,7 +4,7 @@ import org.example.product.Product;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Cleaning extends Product {
+public class CleaningProduct extends Product {
 
     private UseType useType;
 

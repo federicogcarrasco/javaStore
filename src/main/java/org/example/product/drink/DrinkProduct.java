@@ -4,7 +4,7 @@ import org.example.product.Product;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Drink extends Product {
+public class DrinkProduct extends Product {
     private boolean alcohol;
     private Integer alcoholPercentage;
     private boolean imported;
