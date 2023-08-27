@@ -16,13 +16,7 @@ public abstract class Product {
     }
 
     public void setId(String id) {
-        Pattern pattern = Pattern.compile("^A[BCZ]\\d\\d\\d$");
-        Matcher matcher = pattern.matcher(id);
-        if(matcher.find()) {
-            this.id = id;
-        } else {
-            throw new IllegalArgumentException("Wrong Id format.");
-        }
+        this.id = id;
     }
 
     public String getDescription() {
