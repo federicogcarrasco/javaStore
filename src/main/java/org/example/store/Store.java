@@ -1,8 +1,6 @@
 package org.example.store;
 
 import org.example.product.Product;
-import org.example.product.packaged.PackagedProduct;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +84,7 @@ public class Store {
         this.cashBalance = cashBalance;
     }
 
-    public Map<String, Product> getStock() {
+    public Map<Character, List<Product>> getStock() {
         return stock;
     }
 }
