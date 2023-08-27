@@ -22,5 +22,4 @@ public class PackagedTest {
             packaged.setId("AX001");
         });
     }
-
 }
