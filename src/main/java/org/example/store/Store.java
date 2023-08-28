@@ -4,10 +4,7 @@ import org.example.product.Product;
 import org.example.product.drink.DrinkProduct;
 import org.example.product.packaged.PackagedProduct;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Store {
     private String name;
@@ -92,6 +89,20 @@ public class Store {
                             .sorted(Comparator.comparing(Product::getSalePrice))
                             .forEach(product -> result.add(product.getDescription().toUpperCase()));
         return result;
+    }
+
+    public void listProductsWithLessEarningPercentage(int percentage) {
+        List<List<String>> results = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
+        products.addAll(getProductList("xB"));
+        products.addAll(getProductList("xC"));
+        products.addAll(getProductList("xZ"));
+        products.stream()
+                .filter(product -> product.getPrice() < product.getCost() * percentage / 100)
+                .forEach(product -> results.add(new ArrayList<>(Arrays.asList(product.getId(),
+                                                                                product.getDescription(),
+                                                                                String.valueOf(product.getStock())))));
+        results.forEach(r -> System.out.println(r.get(0) + " " + r.get(1) + " " + r.get(2)));
     }
 
     public Product searchInStock(String id) {

@@ -218,4 +218,31 @@ public class StoreTest {
         List<String> expectedResponse = List.of("WATER", "TUNA");
         assertEquals(expectedResponse, store.getFoodWithLessDiscount(10));
     }
+
+    @Test
+    void listProductsWithLessEarningPercentage() {
+        Product product1 = new PackagedProduct();
+        product1.setId("AB001");
+        product1.setDescription("Tuna");
+        product1.setStock(1);
+        product1.setCost(100);
+        product1.setPrice(110);
+        Product product2 = new DrinkProduct();
+        product2.setId("AC002");
+        product2.setDescription("Water");
+        product2.setStock(1);
+        product2.setCost(100);
+        product2.setPrice(110);
+        Product product3 = new DrinkProduct();
+        product3.setId("AC002");
+        product3.setDescription("Beer");
+        product3.setStock(1);
+        product3.setCost(100);
+        product3.setPrice(120);
+        store.buy(product1);
+        store.buy(product2);
+        store.buy(product3);
+
+        store.listProductsWithLessEarningPercentage(15);
+    }
 }
