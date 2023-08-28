@@ -1,7 +1,11 @@
 package org.example.store;
 
 import org.example.product.Product;
+import org.example.product.drink.DrinkProduct;
+import org.example.product.packaged.PackagedProduct;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +79,19 @@ public class Store {
 
         cashBalance += totalValue;
         System.out.println("TOTAL SALE: " + totalValue);
+    }
+
+    public List<String> getFoodWithLessDiscount(int discount) {
+        List<String> result = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
+        products.addAll(getProductList("xB"));
+        products.addAll(getProductList("xC"));
+        products.stream().filter(product -> (product.getDiscount() < discount && (
+                                            (product instanceof DrinkProduct && !((DrinkProduct) product).isImported()) ||
+                                            (product instanceof PackagedProduct && !((PackagedProduct) product).isImported()))))
+                            .sorted(Comparator.comparing(Product::getSalePrice))
+                            .forEach(product -> result.add(product.getDescription().toUpperCase()));
+        return result;
     }
 
     public Product searchInStock(String id) {

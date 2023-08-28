@@ -8,8 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -187,5 +186,36 @@ public class StoreTest {
                 Map.entry("AB001", (byte) 1),
                 Map.entry("AC001", (byte) 3)
         )));
+    }
+
+    @Test
+    void getFoodWithLessDiscount() {
+        Product product1 = new PackagedProduct();
+        product1.setId("AB001");
+        product1.setDescription("Tuna");
+        product1.setStock(1);
+        product1.setCost(85);
+        product1.setPrice(100);
+        product1.setDiscount(9);
+        Product product2 = new DrinkProduct();
+        product2.setId("AC002");
+        product2.setDescription("Water");
+        product2.setStock(1);
+        product2.setCost(85);
+        product2.setPrice(99);
+        product2.setDiscount(9);
+        Product product3 = new DrinkProduct();
+        product3.setId("AC002");
+        product3.setDescription("Beer");
+        product3.setStock(1);
+        product3.setCost(100);
+        product3.setPrice(120);
+        product3.setDiscount(10);
+        store.buy(product1);
+        store.buy(product2);
+        store.buy(product3);
+
+        List<String> expectedResponse = List.of("WATER", "TUNA");
+        assertEquals(expectedResponse, store.getFoodWithLessDiscount(10));
     }
 }
