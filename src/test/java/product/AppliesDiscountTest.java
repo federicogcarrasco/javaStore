@@ -38,6 +38,6 @@ public class AppliesDiscountTest {
         Product product = new PackagedProduct();
         product.setPrice(100);
         product.setDiscount(15);
-        assertEquals(product.getSalePrice(product.getDiscount()), 85);
+        assertEquals(product.getSalePrice(), 85);
     }
 }

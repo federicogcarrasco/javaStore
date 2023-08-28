@@ -53,4 +53,31 @@ public class DrinkProductTest {
         drinkProduct.setAlcoholPercentage(5);
         assertNull(drinkProduct.getAlcoholPercentage());
     }
+
+    @Test
+    void discountForDrinkProductMoreThan15() {
+        DrinkProduct drinkProduct = new DrinkProduct();
+        assertThrows(IllegalArgumentException.class, () -> {
+            drinkProduct.setDiscount(16);
+        });
+    }
+
+    @Test
+    void priceLessThanCostAfterDiscountForDrinkProduct() {
+        DrinkProduct drinkProduct = new DrinkProduct();
+        drinkProduct.setCost(86);
+        drinkProduct.setPrice(100);
+        assertThrows(IllegalArgumentException.class, () -> {
+            drinkProduct.setDiscount(15);
+        });
+    }
+
+    @Test
+    void importedDrinkProductHasTaxOf10() {
+        DrinkProduct drinkProduct = new DrinkProduct();
+        drinkProduct.setCost(100);
+        drinkProduct.setPrice(120);
+        drinkProduct.setImported(true);
+        assertEquals(drinkProduct.getSalePrice(), 132);
+    }
 }
