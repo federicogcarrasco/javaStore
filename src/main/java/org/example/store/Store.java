@@ -68,9 +68,9 @@ public class Store {
             }
 
             System.out.println(productId + " " + product.getDescription() + " " +
-                    saleData.get(productId) + " X " + product.getSalePrice(product.getDiscount()));
+                    saleData.get(productId) + " X " + product.getSalePrice());
             System.out.println();
-            totalValue += product.getSalePrice(product.getDiscount()) * saleData.get(productId);
+            totalValue += product.getSalePrice() * saleData.get(productId);
         }
 
         cashBalance += totalValue;

@@ -10,7 +10,7 @@ public abstract class Product implements AppliesDiscount {
     private float discount;
 
     @Override
-    public double getSalePrice(float discount) {
+    public double getSalePrice() {
         return price - price * discount / 100;
     }
 
