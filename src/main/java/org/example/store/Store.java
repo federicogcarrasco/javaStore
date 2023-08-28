@@ -32,6 +32,51 @@ public class Store {
         cashBalance -= product.getCost() * product.getStock();
     }
 
+    public void sale(Map<String, Byte> saleData) {
+        if (saleData.size() > 3)
+            throw new IllegalArgumentException("No more than 3 products per purchase are allowed.");
+        boolean moreThan10Units = false;
+        for (Byte units : saleData.values())
+            if (units > 10) {
+                moreThan10Units = true;
+                break;
+            }
+        if (moreThan10Units)
+            throw new IllegalArgumentException("No more than 10 units per product are allowed.");
+
+        double totalValue = 0;
+        for (String productId : saleData.keySet()) {
+            Product product = searchInStock(productId);
+
+            if (!product.isForSale()) {
+                System.out.println("The product: " + productId + " " + product.getDescription() + " is not on sale.");
+                System.out.println();
+                saleData.remove(productId);
+                continue;
+            }
+
+            if (product.getStock() < saleData.get(productId)) {
+                System.out.println("There is less stock of the product than is needed.");
+                saleData.put(productId, (byte) product.getStock());
+                product.setStock(0);
+                product.setForSale(false);
+            } else if (product.getStock() == saleData.get(productId)) {
+                product.setStock(0);
+                product.setForSale(false);
+            } else {
+                product.setStock(product.getStock() - saleData.get(productId));
+            }
+
+            System.out.println(productId + " " + product.getDescription() + " " +
+                    saleData.get(productId) + " X " + product.getSalePrice(product.getDiscount()));
+            System.out.println();
+            totalValue += product.getSalePrice(product.getDiscount()) * saleData.get(productId);
+        }
+
+        cashBalance += totalValue;
+        System.out.println("TOTAL SALE: " + totalValue);
+    }
+
     public Product searchInStock(String id) {
         List<Product> stockList = getProductList(id);
         for (Product product : stockList) {
